@@ -1,6 +1,6 @@
 ## Schedule
 
-Begin working on this May 1st. Pull requests welcomed!
+I plan to being working on this May 1st. Pull requests or discussion is hugely welcomed!
 
 ## Goal
 
@@ -46,25 +46,31 @@ Here's an example of the shape of the final product.
 				"image": 'path/to/image.jpg'
 			}
 		]
+	}
 }
 </script>
+```
 
 This way, developers can create a handful of object literals, and forget about worrying about spacing, alignment, animation, interaction, etc. Consider the first slide:
 
-		{
-			"title": 'Learn About Borders',
-			"bullets": [
-				'Thing 1',
-				'Thing 2',
-			],
-			"code": ['path/to/file.css', [2,4]] // path to file, lines to grab
-		}
+```html
+{
+	"title": 'Learn About Borders',
+	"bullets": [
+		'Thing 1',
+		'Thing 2',
+	],
+	"code": ['path/to/file.css', [2,4]] // path to file, lines to grab
+}
+```
 
 This specifies that:
 
 - The slide should have a title of "Learn About Borders"
 - There will be two bullets - each which is activated/displayed in ordered, when the speaker presses the space bar.
 - A sample block of code from `file.css`. Only lines 2-4 from that file will be displayed in the slide.
+
+Once this code is provided, that's all the presenter needs to do. Behind the scenes, the objects will be bound to a template, and the keyboard events/animations/interactions will be prepared. I literally want the JSON to be the _only_ step required.
 
 ## Options
 
@@ -85,4 +91,22 @@ There's a variety of advantages to creating presentations in this fashion:
 - Get your mind out of Keynote, and back into your presentation. Add a few key value pairs, and, bam, your slide is ready to go.
 - Way faster than any alternative
 - Load your presentation as easy as $.getJSON('presentation.js')
-- Because we're using JSON, ceating a presentation-generator UI for non-coders is a much easier process
+- Because we're using JSON, creating a presentation-generator UI for non-coders is a much easier process
+
+## Usage
+
+The idea is that the styling/template is already in place. So I'd imagine that the presenter will only need to do something like:
+
+		var slides = $.getJSON('presentation.js');
+		new Presentation( slides, config );
+
+(Not set in stone; still need to think about this.)
+
+## Tools
+
+As for the tools in this project, I'd like to use:
+
+- *Library* - jQuery (Or maybe just stick with Underscore)
+- *Framework* - Backbone.js
+- *Testing* - QUnit
+- *CSS* - Sass (I prefer Stylus, but Sass is more common)
